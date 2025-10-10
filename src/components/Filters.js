@@ -145,14 +145,15 @@ const Input = styled.input`
   padding: 10px 12px;
   border-radius: 6px;
   border: 1px solid #d7dbe0;
-  background: #f5f7fa;
-  min-width: 160px;
+  background: #fff;
+  min-width: 140px;
   color: #0b1220;
   outline: none;
 
   &:focus {
     border-color: #83bf46;
     box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
+    background: #fff;
   }
 `;
 
@@ -160,17 +161,19 @@ const Select = styled.select`
   padding: 10px 12px;
   border-radius: 6px;
   border: 1px solid #d7dbe0;
-  background: #0f2740;
-  color: #fff;
-  min-width: 160px;
+  background: #fff;
+  color: #0b1220;
+  min-width: 140px;
   outline: none;
 
   option {
     color: #0b1220;
+    background: #fff;
   }
 
   &:focus {
     box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
+    background: #fff;
   }
 `;
 
