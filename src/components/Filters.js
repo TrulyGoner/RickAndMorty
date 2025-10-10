@@ -123,16 +123,18 @@ const Form = styled.form`
 `;
 
 const Field = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-  padding: 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255,255,255,0.02);
+  padding: 6px 8px;
   border-radius: 8px;
-  min-width: 220px;
+  border: 1px solid rgba(255,255,255,0.04);
+  min-width: 140px;
 
   @media (max-width: 600px) {
     min-width: auto;
     width: 100%;
+    justify-content: stretch;
   }
 `;
 
