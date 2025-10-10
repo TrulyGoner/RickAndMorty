@@ -139,22 +139,21 @@ const Field = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 8px 10px;
+  padding: 6px 8px;
   border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: none;
   background: transparent;
-  min-width: 140px;
+  min-width: 120px;
   color: #fff;
   outline: none;
+  font-size: 14px;
 
   &::placeholder {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.6);
   }
 
   &:focus {
-    border-color: #83bf46;
-    box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
-    background: transparent;
+    outline: none;
   }
 `;
 
