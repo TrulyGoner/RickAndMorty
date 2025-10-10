@@ -17,7 +17,7 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     episode: episodes
   } = content;
 
-  function togglePopup(e) {
+  const togglePopup = useCallback((e) => {
     if (e && e.currentTarget !== e.target) {
       return;
     }
@@ -26,7 +26,7 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
       ...prevState,
       visible: !prevState.visible
     }));
-  }
+  }, [setSettings]);
 
   useEffect(() => {
     // prevent background scroll when popup is visible
