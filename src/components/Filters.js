@@ -120,9 +120,17 @@ export function Filters() {
 const Form = styled.form`
   display: flex;
   gap: 12px;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-direction: column;
   width: 100%;
+
+  @media (max-width: 900px) {
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    align-items: stretch;
+  }
 `;
 
 const Field = styled.div`
@@ -188,32 +196,41 @@ const Select = styled.select`
 const TopRow = styled.div`
   display: flex;
   gap: 12px;
-  width: 100%;
+  width: 540px;
+  max-width: 100%;
   align-items: center;
   justify-content: flex-end;
 
   ${Field} {
-    min-width: 120px;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    width: 100%;
   }
 `;
 
 const BottomRow = styled.div`
   display: flex;
   gap: 12px;
-  width: 100%;
+  width: 540px;
+  max-width: 100%;
   align-items: center;
   justify-content: flex-end;
 
   ${Field} {
-    min-width: 140px;
+    flex: 1 1 0;
+    min-width: 0;
   }
 
-  ${Field}:nth-child(1) {
-    min-width: 220px;
+  ${Actions} {
+    margin-left: 12px;
+    flex: 0 0 auto;
   }
 
-  ${Field}:nth-child(2) {
-    min-width: 140px;
+  @media (max-width: 900px) {
+    width: 100%;
   }
 `;
 
