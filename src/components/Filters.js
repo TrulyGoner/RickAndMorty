@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useData } from './providers';
 
@@ -18,7 +18,7 @@ export function Filters() {
   const [gender, setGender] = useState(url.searchParams.get('gender') || '');
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
 
-  function applyFilters(e) {
+  const applyFilters = useCallback((e) => {
     e?.preventDefault();
 
     const next = new URL(url.toString());
@@ -37,9 +37,9 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  }
+  }, [name, status, gender, species, setActivePage, setApiURL, url]);
 
-  function clearFilters() {
+  const clearFilters = useCallback(() => {
     const next = new URL(url.toString());
 
     next.search = '';
@@ -51,18 +51,18 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  }
+  }, [setActivePage, setApiURL, url]);
 
   return (
     <Form onSubmit={applyFilters}>
       <Field>
         <Label>Search</Label>
-        <Input value={name} onChange={(e) => setName(e.target.value)} />
+        <Input value={name} onChange={(e) => onNameChange(e)} />
       </Field>
 
       <Field>
         <Label>Status</Label>
-        <Select value={status} onChange={(e) => setStatus(e.target.value)}>
+        <Select value={status} onChange={(e) => onStatusChange(e)}>
           <option value="">Any</option>
           <option value="alive">Alive</option>
           <option value="dead">Dead</option>
@@ -72,7 +72,7 @@ export function Filters() {
 
       <Field>
         <Label>Gender</Label>
-        <Select value={gender} onChange={(e) => setGender(e.target.value)}>
+        <Select value={gender} onChange={(e) => onGenderChange(e)}>
           <option value="">Any</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -83,7 +83,7 @@ export function Filters() {
 
       <Field>
         <Label>Species</Label>
-        <Input value={species} onChange={(e) => setSpecies(e.target.value)} />
+        <Input value={species} onChange={(e) => onSpeciesChange(e)} />
       </Field>
 
       <Actions>
