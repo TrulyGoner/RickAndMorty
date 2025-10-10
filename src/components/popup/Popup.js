@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
@@ -17,7 +17,7 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     episode: episodes
   } = content;
 
-  const togglePopup = useCallback((e) => {
+  function togglePopup(e) {
     if (e && e.currentTarget !== e.target) {
       return;
     }
@@ -26,7 +26,7 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
       ...prevState,
       visible: !prevState.visible
     }));
-  }, [setSettings]);
+  }
 
   useEffect(() => {
     // prevent background scroll when popup is visible
