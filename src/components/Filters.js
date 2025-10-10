@@ -186,6 +186,7 @@ const Actions = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  margin-left: auto;
 `;
 
 const Button = styled.button`
