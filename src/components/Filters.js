@@ -214,6 +214,13 @@ const TopRow = styled.div`
   }
 `;
 
+const Actions = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: 12px;
+`;
+
 const BottomRow = styled.div`
   display: flex;
   gap: 12px;
@@ -235,13 +242,6 @@ const BottomRow = styled.div`
   @media (max-width: 900px) {
     width: 100%;
   }
-`;
-
-const Actions = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-left: 12px;
 `;
 
 const Button = styled.button`
