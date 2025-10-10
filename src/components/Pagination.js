@@ -1,16 +1,21 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useData } from './providers';
 
 export function Pagination() {
   const [pages, setPages] = useState([]);
   const { apiURL, info, activePage, setActivePage, setApiURL } = useData();
 
-  const pageClickHandler = (index) => {
+  const pageClickHandler = useCallback((index) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActivePage(index);
     setApiURL(pages[index]);
-  };
+  }, [pages, setActivePage, setApiURL]);
+
+  const goFirst = useCallback(() => pageClickHandler(0), [pageClickHandler]);
+  const goPrev = useCallback(() => pageClickHandler(activePage - 1), [activePage, pageClickHandler]);
+  const goNext = useCallback(() => pageClickHandler(activePage + 1), [activePage, pageClickHandler]);
+  const goLast = useCallback(() => pageClickHandler(pages.length - 1), [pages, pageClickHandler]);
 
   useEffect(() => {
     const createdPages = Array.from({ length: info.pages }, (_, i) => {
@@ -32,12 +37,12 @@ export function Pagination() {
         <>
           {activePage - 1 !== 0 && (
             <>
-              <Page onClick={() => pageClickHandler(0)}>« First</Page>
+              <Page onClick={goFirst}>« First</Page>
               <Ellipsis>...</Ellipsis>
             </>
           )}
 
-          <Page onClick={() => pageClickHandler(activePage - 1)}>
+          <Page onClick={goPrev}>
             {activePage}
           </Page>
         </>
@@ -47,14 +52,14 @@ export function Pagination() {
 
       {pages[activePage + 1] && (
         <>
-          <Page onClick={() => pageClickHandler(activePage + 1)}>
+          <Page onClick={goNext}>
             {activePage + 2}
           </Page>
 
           {activePage + 1 !== pages.length - 1 && (
             <>
               <Ellipsis>...</Ellipsis>
-              <Page onClick={() => pageClickHandler(pages.length)}>Last »</Page>
+              <Page onClick={goLast}>Last »</Page>
             </>
           )}
         </>
@@ -81,13 +86,6 @@ const Page = styled.span`
   }
 `;
 
-const Container = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  justify-items: center;
-  gap: 30px;
-`;
 
 const Ellipsis = styled(Page)`
   cursor: default;
