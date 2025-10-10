@@ -23,26 +23,29 @@ export function Filters() {
   const onGenderChange = useCallback((e) => setGender(e.target.value), []);
   const onSpeciesChange = useCallback((e) => setSpecies(e.target.value), []);
 
-  const applyFilters = useCallback((e) => {
-    e?.preventDefault();
+  const applyFilters = useCallback(
+    (e) => {
+      e?.preventDefault();
 
-    const next = new URL(url.toString());
+      const next = new URL(url.toString());
 
-    // clear existing filter params
-    next.searchParams.delete('name');
-    next.searchParams.delete('status');
-    next.searchParams.delete('gender');
-    next.searchParams.delete('species');
-    next.searchParams.delete('page');
+      // clear existing filter params
+      next.searchParams.delete('name');
+      next.searchParams.delete('status');
+      next.searchParams.delete('gender');
+      next.searchParams.delete('species');
+      next.searchParams.delete('page');
 
-    if (name.trim()) next.searchParams.set('name', name.trim());
-    if (status) next.searchParams.set('status', status);
-    if (gender) next.searchParams.set('gender', gender);
-    if (species.trim()) next.searchParams.set('species', species.trim());
+      if (name.trim()) next.searchParams.set('name', name.trim());
+      if (status) next.searchParams.set('status', status);
+      if (gender) next.searchParams.set('gender', gender);
+      if (species.trim()) next.searchParams.set('species', species.trim());
 
-    setActivePage(0);
-    setApiURL(next.toString());
-  }, [name, status, gender, species, setActivePage, setApiURL, url]);
+      setActivePage(0);
+      setApiURL(next.toString());
+    },
+    [name, status, gender, species, setActivePage, setApiURL, url]
+  );
 
   const clearFilters = useCallback(() => {
     const next = new URL(url.toString());

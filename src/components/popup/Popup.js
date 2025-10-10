@@ -17,19 +17,19 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     episode: episodes
   } = content;
 
-  const togglePopup = useCallback((e) => {
-    if (e && e.currentTarget !== e.target) {
-      return;
-    }
+  const togglePopup = useCallback(
+    (e) => {
+      if (e && e.currentTarget !== e.target) {
+        return;
+      }
 
-    setSettings((prevState) => ({
-      ...prevState,
-      visible: !prevState.visible
-    }));
-  },
-  [
-    setSettings
-  ]);
+      setSettings((prevState) => ({
+        ...prevState,
+        visible: !prevState.visible
+      }));
+    },
+    [setSettings]
+  );
 
   useEffect(() => {
     // prevent background scroll when popup is visible
