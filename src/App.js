@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Pagination, ItemsGrid, useData, Header, AppState } from './components';
 
-function App() {
+export function App() {
   const { isFetching, isError } = useData();
 
   return (
@@ -44,4 +44,4 @@ const Main = styled.main`
 `;
 
 
-export default App;
+export { App };
