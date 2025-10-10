@@ -106,9 +106,14 @@ export function Filters() {
 
 const Form = styled.form`
   display: flex;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
 
   @media (max-width: 600px) {
     flex-direction: column;
