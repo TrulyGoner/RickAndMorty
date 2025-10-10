@@ -17,11 +17,13 @@ export function Filters() {
   const [status, setStatus] = useState(url.searchParams.get('status') || '');
   const [gender, setGender] = useState(url.searchParams.get('gender') || '');
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
+  const [type, setType] = useState(url.searchParams.get('type') || '');
 
   const onNameChange = useCallback((e) => setName(e.target.value), []);
   const onStatusChange = useCallback((e) => setStatus(e.target.value), []);
   const onGenderChange = useCallback((e) => setGender(e.target.value), []);
   const onSpeciesChange = useCallback((e) => setSpecies(e.target.value), []);
+  const onTypeChange = useCallback((e) => setType(e.target.value), []);
 
   const applyFilters = useCallback(
     (e) => {
@@ -34,12 +36,14 @@ export function Filters() {
       next.searchParams.delete('status');
       next.searchParams.delete('gender');
       next.searchParams.delete('species');
+      next.searchParams.delete('type');
       next.searchParams.delete('page');
 
       if (name.trim()) next.searchParams.set('name', name.trim());
       if (status) next.searchParams.set('status', status);
       if (gender) next.searchParams.set('gender', gender);
       if (species.trim()) next.searchParams.set('species', species.trim());
+      if (type.trim()) next.searchParams.set('type', type.trim());
 
       setActivePage(0);
       setApiURL(next.toString());
@@ -56,6 +60,7 @@ export function Filters() {
     setStatus('');
     setGender('');
     setSpecies('');
+    setType('');
 
     setActivePage(0);
     setApiURL(next.toString());
@@ -63,43 +68,51 @@ export function Filters() {
 
   return (
     <Form onSubmit={applyFilters}>
-      <Field>
-        <Input placeholder="Search" value={name} onChange={onNameChange} />
-      </Field>
+      <TopRow>
+        <Field>
+          <Select value={status} onChange={onStatusChange}>
+            <option value="" disabled>
+              Status
+            </option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+            <option value="unknown">Unknown</option>
+          </Select>
+        </Field>
 
-      <Field>
-        <Select value={status} onChange={onStatusChange}>
-          <option value="" disabled>
-            Status
-          </option>
-          <option value="alive">Alive</option>
-          <option value="dead">Dead</option>
-          <option value="unknown">Unknown</option>
-        </Select>
-      </Field>
+        <Field>
+          <Select value={gender} onChange={onGenderChange}>
+            <option value="" disabled>
+              Gender
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="genderless">Genderless</option>
+            <option value="unknown">Unknown</option>
+          </Select>
+        </Field>
 
-      <Field>
-        <Select value={gender} onChange={onGenderChange}>
-          <option value="" disabled>
-            Gender
-          </option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="genderless">Genderless</option>
-          <option value="unknown">Unknown</option>
-        </Select>
-      </Field>
+        <Field>
+          <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
+        </Field>
+      </TopRow>
 
-      <Field>
-        <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
-      </Field>
+      <BottomRow>
+        <Field>
+          <Input placeholder="Name" value={name} onChange={onNameChange} />
+        </Field>
 
-      <Actions>
-        <Button type="submit">Apply</Button>
-        <ClearButton type="button" onClick={clearFilters}>
-          Clear
-        </ClearButton>
-      </Actions>
+        <Field>
+          <Input placeholder="Type" value={type} onChange={onTypeChange} />
+        </Field>
+
+        <Actions>
+          <Button type="submit">Apply</Button>
+          <ClearButton type="button" onClick={clearFilters}>
+            Clear
+          </ClearButton>
+        </Actions>
+      </BottomRow>
     </Form>
   );
 }
@@ -107,19 +120,9 @@ export function Filters() {
 const Form = styled.form`
   display: flex;
   gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: column;
   width: 100%;
-
-  @media (max-width: 900px) {
-    justify-content: center;
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
 `;
 
 const Field = styled.div`
@@ -182,11 +185,25 @@ const Select = styled.select`
   appearance: none;
 `;
 
+const TopRow = styled.div`
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+`;
+
+const BottomRow = styled.div`
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+`;
+
 const Actions = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-left: auto;
+  margin-left: 12px;
 `;
 
 const Button = styled.button`
