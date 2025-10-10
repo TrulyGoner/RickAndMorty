@@ -42,7 +42,8 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  }, [
+  },
+  [
     name,
     status,
     gender,
@@ -64,7 +65,12 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  }, [setActivePage, setApiURL, url]);
+  },
+  [
+    setActivePage,
+    setApiURL,
+    url
+  ]);
 
   return (
     <Form onSubmit={applyFilters}>
