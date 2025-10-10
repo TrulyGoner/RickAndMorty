@@ -120,16 +120,19 @@ export function Filters() {
 const Form = styled.form`
   display: flex;
   gap: 12px;
-  align-items: flex-end;
+  align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 540px;
+  max-width: 100%;
 
   @media (max-width: 900px) {
+    width: 100%;
     align-items: center;
   }
 
   @media (max-width: 600px) {
     align-items: stretch;
+    gap: 10px;
   }
 `;
 
