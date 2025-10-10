@@ -193,7 +193,7 @@ const TopRow = styled.div`
   justify-content: flex-end;
 
   ${Field} {
-    min-width: 140px;
+    min-width: 120px;
   }
 `;
 
@@ -205,7 +205,15 @@ const BottomRow = styled.div`
   justify-content: flex-end;
 
   ${Field} {
-    min-width: 160px;
+    min-width: 140px;
+  }
+
+  ${Field}:nth-child(1) {
+    min-width: 220px;
+  }
+
+  ${Field}:nth-child(2) {
+    min-width: 140px;
   }
 `;
 
