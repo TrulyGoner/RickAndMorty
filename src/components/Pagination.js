@@ -12,24 +12,42 @@ export function Pagination() {
       setActivePage(index);
       setApiURL(pages[index]);
     },
-    [pages, setActivePage, setApiURL]
+    [
+      pages,
+      setActivePage,
+      setApiURL
+    ]
   );
 
-  const goFirst = useCallback(() => pageClickHandler(0), [pageClickHandler]);
+  const goFirst = useCallback(
+    () => pageClickHandler(0),
+    [
+      pageClickHandler
+    ]
+  );
 
   const goPrev = useCallback(
     () => pageClickHandler(activePage - 1),
-    [activePage, pageClickHandler]
+    [
+      activePage,
+      pageClickHandler
+    ]
   );
 
   const goNext = useCallback(
     () => pageClickHandler(activePage + 1),
-    [activePage, pageClickHandler]
+    [
+      activePage,
+      pageClickHandler
+    ]
   );
 
   const goLast = useCallback(
     () => pageClickHandler(pages.length - 1),
-    [pages, pageClickHandler]
+    [
+      pages,
+      pageClickHandler
+    ]
   );
 
   useEffect(() => {
@@ -57,9 +75,7 @@ export function Pagination() {
             </>
           )}
 
-          <Page onClick={goPrev}>
-            {activePage}
-          </Page>
+          <Page onClick={goPrev}>{activePage}</Page>
         </>
       )}
 
@@ -67,9 +83,7 @@ export function Pagination() {
 
       {pages[activePage + 1] && (
         <>
-          <Page onClick={goNext}>
-            {activePage + 2}
-          </Page>
+          <Page onClick={goNext}>{activePage + 2}</Page>
 
           {activePage + 1 !== pages.length - 1 && (
             <>
