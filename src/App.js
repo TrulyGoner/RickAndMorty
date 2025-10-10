@@ -42,6 +42,3 @@ const Main = styled.main`
     max-width: 90%;
   }
 `;
-
-
-export { App };
