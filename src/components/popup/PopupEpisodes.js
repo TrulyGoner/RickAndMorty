@@ -21,6 +21,7 @@ export function PopupEpisodes({ episodes }) {
 
     const rawIds = episodes.map((ep) => {
       const m = String(ep).match(/\d+$/);
+
       return m ? m[0] : null;
     });
 
