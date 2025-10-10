@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
