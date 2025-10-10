@@ -106,12 +106,13 @@ export function Filters() {
 
 const Form = styled.form`
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: center;
+  flex-wrap: wrap;
 
   @media (max-width: 600px) {
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     align-items: stretch;
   }
 `;
@@ -119,48 +120,83 @@ const Form = styled.form`
 const Field = styled.div`
   display: flex;
   flex-direction: column;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  min-width: 220px;
+
+  @media (max-width: 600px) {
+    min-width: auto;
+    width: 100%;
+  }
 `;
 
 const Label = styled.label`
-  color: #fff;
+  color: #ffb457;
   font-size: 12px;
-  margin-bottom: 6px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 `;
 
 const Input = styled.input`
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #d7dbe0;
+  background: #f5f7fa;
   min-width: 160px;
-  background: #fff;
+  color: #0b1220;
+  outline: none;
+
+  &:focus {
+    border-color: #83bf46;
+    box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
+  }
 `;
 
 const Select = styled.select`
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid #d7dbe0;
+  background: #0f2740;
+  color: #fff;
+  min-width: 160px;
+  outline: none;
+
+  option {
+    color: #0b1220;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
+  }
 `;
 
 const Actions = styled.div`
   display: flex;
   gap: 8px;
+  align-items: center;
 `;
 
 const Button = styled.button`
-  padding: 8px 12px;
+  padding: 10px 14px;
   background: #83bf46;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 12px rgba(131, 191, 70, 0.12);
 `;
 
 const ClearButton = styled.button`
-  padding: 8px 12px;
+  padding: 10px 14px;
   background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
-  border-radius: 6px;
+  color: #0b1220;
+  border: 1px solid #e6e9ef;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
 `;
