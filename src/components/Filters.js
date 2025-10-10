@@ -120,10 +120,9 @@ const Form = styled.form`
 const Field = styled.div`
   display: flex;
   flex-direction: column;
-  background: #fff;
-  padding: 12px;
+  background: transparent;
+  padding: 8px 10px;
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
   min-width: 220px;
 
   @media (max-width: 600px) {
@@ -142,27 +141,31 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 6px;
-  border: 1px solid #d7dbe0;
-  background: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
   min-width: 140px;
-  color: #0b1220;
+  color: #fff;
   outline: none;
+
+  &::placeholder {
+    color: rgba(255,255,255,0.65);
+  }
 
   &:focus {
     border-color: #83bf46;
     box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
-    background: #fff;
+    background: transparent;
   }
 `;
 
 const Select = styled.select`
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 6px;
-  border: 1px solid #d7dbe0;
-  background: #fff;
-  color: #0b1220;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: #fff;
   min-width: 140px;
   outline: none;
 
@@ -173,7 +176,7 @@ const Select = styled.select`
 
   &:focus {
     box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
-    background: #fff;
+    background: transparent;
   }
 `;
 
@@ -192,14 +195,22 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 700;
   box-shadow: 0 6px 12px rgba(131, 191, 70, 0.12);
+
+  &:hover {
+    filter: brightness(0.95);
+  }
 `;
 
 const ClearButton = styled.button`
   padding: 10px 14px;
   background: transparent;
-  color: #0b1220;
-  border: 1px solid #e6e9ef;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+
+  &:hover {
+    background: rgba(255,77,79,0.08);
+  }
 `;
