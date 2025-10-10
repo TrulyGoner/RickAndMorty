@@ -10,45 +10,54 @@ export function PopupEpisodes({ episodes }) {
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
-    if (!episodes?.length) {
-      setSeries([]);
-      setIsFetching(false);
+    let cancelled = false;
 
-      return;
-    }
-
-    setIsFetching(true);
-
-    const rawIds = episodes.map((ep) => {
-      const m = String(ep).match(/\d+$/);
-
-      return m ? m[0] : null;
-    });
-
-    const episodesIds = rawIds.filter(Boolean);
-
-    if (!episodesIds.length) {
-      setSeries([]);
-      setIsFetching(false);
-
-      return;
-    }
-
-    axios.get(`${API_EPISODES_URL}/${episodesIds.join(',')}`)
-      .then(({ data }) => {
-        if (episodes.length === 1) {
-          setSeries([data]);
-        } else {
-          setSeries(data);
-        }
-
-        setIsFetching(false);
-      })
-      .catch((e) => {
-        console.error(e);
+    async function loadEpisodes() {
+      if (!episodes?.length) {
         setSeries([]);
         setIsFetching(false);
+
+        return;
+      }
+
+      setIsFetching(true);
+
+      const rawIds = episodes.map((ep) => {
+        const m = String(ep).match(/\d+$/);
+
+        return m ? m[0] : null;
       });
+
+      const episodesIds = rawIds.filter(Boolean);
+
+      if (!episodesIds.length) {
+        setSeries([]);
+        setIsFetching(false);
+
+        return;
+      }
+
+      try {
+        const { data } = await axios.get(
+          `${API_EPISODES_URL}/${episodesIds.join(',')}`
+        );
+
+        if (cancelled) return;
+
+        setSeries(episodes.length === 1 ? [data] : data);
+      } catch (e) {
+        console.error(e);
+        setSeries([]);
+      } finally {
+        if (!cancelled) setIsFetching(false);
+      }
+    }
+
+    loadEpisodes();
+
+    return () => {
+      cancelled = true;
+    };
   }, [episodes]);
 
   if (isFetching) {
