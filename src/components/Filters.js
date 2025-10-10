@@ -42,7 +42,15 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  }, [name, status, gender, species, setActivePage, setApiURL, url]);
+  }, [
+    name,
+    status,
+    gender,
+    species,
+    setActivePage,
+    setApiURL,
+    url
+  ]);
 
   const clearFilters = useCallback(() => {
     const next = new URL(url.toString());
@@ -62,12 +70,12 @@ export function Filters() {
     <Form onSubmit={applyFilters}>
       <Field>
         <Label>Search</Label>
-        <Input value={name} onChange={(e) => onNameChange(e)} />
+        <Input value={name} onChange={onNameChange} />
       </Field>
 
       <Field>
         <Label>Status</Label>
-        <Select value={status} onChange={(e) => onStatusChange(e)}>
+        <Select value={status} onChange={onStatusChange}>
           <option value="">Any</option>
           <option value="alive">Alive</option>
           <option value="dead">Dead</option>
@@ -77,7 +85,7 @@ export function Filters() {
 
       <Field>
         <Label>Gender</Label>
-        <Select value={gender} onChange={(e) => onGenderChange(e)}>
+        <Select value={gender} onChange={onGenderChange}>
           <option value="">Any</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -88,7 +96,7 @@ export function Filters() {
 
       <Field>
         <Label>Species</Label>
-        <Input value={species} onChange={(e) => onSpeciesChange(e)} />
+        <Input value={species} onChange={onSpeciesChange} />
       </Field>
 
       <Actions>
