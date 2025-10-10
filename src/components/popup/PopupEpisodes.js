@@ -10,23 +10,52 @@ export function PopupEpisodes({ episodes }) {
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
-    if (!episodes?.length) {
-      return;
+    let cancelled = false;
+
+    async function loadEpisodes() {
+      if (!episodes?.length) {
+        setSeries([]);
+        setIsFetching(false);
+
+        return;
+      }
+
+      setIsFetching(true);
+
+      const rawIds = episodes.map((ep) => {
+        const m = String(ep).match(/\d+$/);
+
+        return m ? m[0] : null;
+      });
+
+      const episodesIds = rawIds.filter(Boolean);
+
+      if (episodesIds.length) {
+        try {
+          const { data } = await axios.get(
+            `${API_EPISODES_URL}/${episodesIds.join(',')}`
+          );
+
+          if (!cancelled) {
+            setSeries(episodes.length === 1 ? [data] : data);
+          }
+        } catch (e) {
+          console.error(e);
+          setSeries([]);
+        } finally {
+          if (!cancelled) setIsFetching(false);
+        }
+      } else {
+        setSeries([]);
+        setIsFetching(false);
+      }
     }
 
-    setIsFetching(true);
+    loadEpisodes();
 
-    const episodesIds = episodes.map((ep) => ep.match(/\d+$/)[0]);
-
-    axios
-      .get(`${API_EPISODES_URL}/${episodesIds.join(',')}`)
-      .then(({ data }) => {
-        if (episodes.length === 1) {
-          setSeries([data]);
-        } else {
-          setSeries(data);
-        }
-      });
+    return () => {
+      cancelled = true;
+    };
   }, [episodes]);
 
   if (isFetching) {
