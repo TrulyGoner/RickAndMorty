@@ -188,16 +188,16 @@ const Actions = styled.div`
 
 const Button = styled.button`
   padding: 10px 14px;
-  background: #83bf46;
-  color: #fff;
-  border: none;
+  background: transparent;
+  color: #83bf46;
+  border: 1px solid #83bf46;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
-  box-shadow: 0 6px 12px rgba(131, 191, 70, 0.12);
+  box-shadow: none;
 
   &:hover {
-    filter: brightness(0.95);
+    background: rgba(131,191,70,0.08);
   }
 `;
 
