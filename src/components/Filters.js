@@ -190,6 +190,11 @@ const TopRow = styled.div`
   gap: 12px;
   width: 100%;
   align-items: center;
+  justify-content: flex-end;
+
+  ${Field} {
+    min-width: 140px;
+  }
 `;
 
 const BottomRow = styled.div`
@@ -197,6 +202,11 @@ const BottomRow = styled.div`
   gap: 12px;
   width: 100%;
   align-items: center;
+  justify-content: flex-end;
+
+  ${Field} {
+    min-width: 160px;
+  }
 `;
 
 const Actions = styled.div`
