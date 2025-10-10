@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useData } from './providers';
 
