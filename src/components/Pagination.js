@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useData } from './providers';
 
 export function Pagination() {
