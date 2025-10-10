@@ -13,6 +13,7 @@ export function PopupEpisodes({ episodes }) {
     if (!episodes?.length) {
       setSeries([]);
       setIsFetching(false);
+
       return;
     }
 
