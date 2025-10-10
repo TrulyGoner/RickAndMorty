@@ -6,49 +6,27 @@ export function Pagination() {
   const [pages, setPages] = useState([]);
   const { apiURL, info, activePage, setActivePage, setApiURL } = useData();
 
-  const pageClickHandler = useCallback(
-    (index) => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActivePage(index);
-      setApiURL(pages[index]);
-    },
-    [
-      pages,
-      setActivePage,
-      setApiURL
-    ]
-  );
+  function pageClickHandler(index) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setActivePage(index);
+    setApiURL(pages[index]);
+  }
 
-  const goFirst = useCallback(
-    () => pageClickHandler(0),
-    [
-      pageClickHandler
-    ]
-  );
+  function goFirst() {
+    pageClickHandler(0);
+  }
 
-  const goPrev = useCallback(
-    () => pageClickHandler(activePage - 1),
-    [
-      activePage,
-      pageClickHandler
-    ]
-  );
+  function goPrev() {
+    pageClickHandler(activePage - 1);
+  }
 
-  const goNext = useCallback(
-    () => pageClickHandler(activePage + 1),
-    [
-      activePage,
-      pageClickHandler
-    ]
-  );
+  function goNext() {
+    pageClickHandler(activePage + 1);
+  }
 
-  const goLast = useCallback(
-    () => pageClickHandler(pages.length - 1),
-    [
-      pages,
-      pageClickHandler
-    ]
-  );
+  function goLast() {
+    pageClickHandler(pages.length - 1);
+  }
 
   useEffect(() => {
     const createdPages = Array.from({ length: info.pages }, (_, i) => {
