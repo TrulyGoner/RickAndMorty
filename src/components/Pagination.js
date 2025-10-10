@@ -18,11 +18,11 @@ export function Pagination() {
 
       URLWithPage.searchParams.set('page', i + 1);
 
-      return URLWithPage;
+      return URLWithPage.toString();
     });
 
     setPages(createdPages);
-  }, [info]);
+  }, [info, apiURL]);
 
   if (pages.length <= 1) return null;
 
