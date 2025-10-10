@@ -10,13 +10,16 @@ export function Pagination() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActivePage(index);
     setApiURL(pages[index]);
-  }, [
+  },
+  [
     pages,
     setActivePage,
     setApiURL
   ]);
 
-  const goFirst = useCallback(() => pageClickHandler(0), [pageClickHandler]);
+  const goFirst = useCallback(() => pageClickHandler(0), [
+    pageClickHandler
+  ]);
 
   const goPrev = useCallback(
     () => pageClickHandler(activePage - 1),
