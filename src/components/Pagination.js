@@ -93,7 +93,6 @@ const Page = styled.span`
   }
 `;
 
-
 const Ellipsis = styled(Page)`
   cursor: default;
 
