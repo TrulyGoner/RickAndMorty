@@ -52,6 +52,7 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     };
 
     window.addEventListener('keydown', onKey);
+
     return () => window.removeEventListener('keydown', onKey);
   }, [visible, setSettings]);
 
