@@ -12,8 +12,6 @@ const defaultPopupSettings = {
 export function ItemsGrid() {
   const { characters } = useData();
   const [popupSettings, setPopupSettings] = useState(defaultPopupSettings);
-
-
   const cardOnClickHandler = useCallback((props) => {
     setPopupSettings({
       visible: true,
@@ -27,12 +25,9 @@ export function ItemsGrid() {
 
   return (
     <Container>
-      {characters.map((props) => {
-        const handleCardClick = () => cardOnClickHandler(props);
-        return (
-          <Card key={props.id} onClickHandler={handleCardClick} {...props} />
-        );
-      })}
+      {characters.map((props) => (
+        <Card key={props.id} onClickHandler={cardOnClickHandler} {...props} />
+      ))}
 
       <Popup settings={popupSettings} setSettings={setPopupSettings} />
     </Container>
