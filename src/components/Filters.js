@@ -49,7 +49,7 @@ export function Filters() {
       setActivePage(0);
       setApiURL(next.toString());
     },
-    [name, status, gender, species, setActivePage, setApiURL, url]
+    [name, status, gender, species, type, setActivePage, setApiURL, url]
   );
 
   const clearFilters = useCallback(() => {
