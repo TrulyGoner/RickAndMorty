@@ -18,6 +18,11 @@ export function Filters() {
   const [gender, setGender] = useState(url.searchParams.get('gender') || '');
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
 
+  const onNameChange = useCallback((e) => setName(e.target.value), []);
+  const onStatusChange = useCallback((e) => setStatus(e.target.value), []);
+  const onGenderChange = useCallback((e) => setGender(e.target.value), []);
+  const onSpeciesChange = useCallback((e) => setSpecies(e.target.value), []);
+
   const applyFilters = useCallback((e) => {
     e?.preventDefault();
 
