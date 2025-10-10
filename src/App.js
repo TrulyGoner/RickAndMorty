@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Pagination, ItemsGrid, useData, Header, AppState } from './components';
 
-function App() {
+export function App() {
   const { isFetching, isError } = useData();
 
   return (
@@ -42,6 +42,3 @@ const Main = styled.main`
     max-width: 90%;
   }
 `;
-
-
-export default App;
