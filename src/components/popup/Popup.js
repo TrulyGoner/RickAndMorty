@@ -26,7 +26,10 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
       ...prevState,
       visible: !prevState.visible
     }));
-  }, [setSettings]);
+  },
+  [
+    setSettings
+  ]);
 
   useEffect(() => {
     // prevent background scroll when popup is visible
