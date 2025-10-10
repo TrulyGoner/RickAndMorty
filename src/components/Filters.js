@@ -64,14 +64,14 @@ export function Filters() {
   return (
     <Form onSubmit={applyFilters}>
       <Field>
-        <Label>Search</Label>
-        <Input value={name} onChange={onNameChange} />
+        <Input placeholder="Search" value={name} onChange={onNameChange} />
       </Field>
 
       <Field>
-        <Label>Status</Label>
         <Select value={status} onChange={onStatusChange}>
-          <option value="">Any</option>
+          <option value="" disabled>
+            Status
+          </option>
           <option value="alive">Alive</option>
           <option value="dead">Dead</option>
           <option value="unknown">Unknown</option>
@@ -79,9 +79,10 @@ export function Filters() {
       </Field>
 
       <Field>
-        <Label>Gender</Label>
         <Select value={gender} onChange={onGenderChange}>
-          <option value="">Any</option>
+          <option value="" disabled>
+            Gender
+          </option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="genderless">Genderless</option>
@@ -90,8 +91,7 @@ export function Filters() {
       </Field>
 
       <Field>
-        <Label>Species</Label>
-        <Input value={species} onChange={onSpeciesChange} />
+        <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
       </Field>
 
       <Actions>
@@ -129,15 +129,6 @@ const Field = styled.div`
     min-width: auto;
     width: 100%;
   }
-`;
-
-const Label = styled.label`
-  color: #ffb457;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
 `;
 
 const Input = styled.input`
