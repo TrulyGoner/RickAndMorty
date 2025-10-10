@@ -30,35 +30,33 @@ export function PopupEpisodes({ episodes }) {
 
       const episodesIds = rawIds.filter(Boolean);
 
-      if (!episodesIds.length) {
-        setSeries([]);
-        setIsFetching(false);
-
-        return;
-      }
-
+    if (episodesIds.length) {
       try {
         const { data } = await axios.get(
           `${API_EPISODES_URL}/${episodesIds.join(',')}`
         );
 
-        if (cancelled) return;
-
-        setSeries(episodes.length === 1 ? [data] : data);
+        if (!cancelled) {
+          setSeries(episodes.length === 1 ? [data] : data);
+        }
       } catch (e) {
         console.error(e);
         setSeries([]);
       } finally {
         if (!cancelled) setIsFetching(false);
       }
+    } else {
+      setSeries([]);
+      setIsFetching(false);
     }
+  }
 
-    loadEpisodes();
+  loadEpisodes();
 
-    return () => {
-      cancelled = true;
-    };
-  }, [episodes]);
+  return () => {
+    cancelled = true;
+  };
+}, [episodes]);
 
   if (isFetching) {
     return <Loader />;
