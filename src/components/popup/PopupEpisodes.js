@@ -11,12 +11,23 @@ export function PopupEpisodes({ episodes }) {
 
   useEffect(() => {
     if (!episodes?.length) {
+      setSeries([]);
+      setIsFetching(false);
       return;
     }
 
     setIsFetching(true);
 
-    const episodesIds = episodes.map((ep) => ep.match(/\d+$/)[0]);
+    const episodesIds = episodes.map((ep) => {
+      const m = String(ep).match(/\d+$/);
+      return m ? m[0] : null;
+    }).filter(Boolean);
+
+    if (!episodesIds.length) {
+      setSeries([]);
+      setIsFetching(false);
+      return;
+    }
 
     axios
       .get(`${API_EPISODES_URL}/${episodesIds.join(',')}`)
@@ -26,6 +37,12 @@ export function PopupEpisodes({ episodes }) {
         } else {
           setSeries(data);
         }
+        setIsFetching(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setSeries([]);
+        setIsFetching(false);
       });
   }, [episodes]);
 
