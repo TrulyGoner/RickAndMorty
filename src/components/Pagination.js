@@ -1,32 +1,21 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useData } from './providers';
 
 export function Pagination() {
   const [pages, setPages] = useState([]);
   const { apiURL, info, activePage, setActivePage, setApiURL } = useData();
 
-  function pageClickHandler(index) {
+  const pageClickHandler = useCallback((index) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActivePage(index);
     setApiURL(pages[index]);
-  }
+  }, [pages, setActivePage, setApiURL]);
 
-  function goFirst() {
-    pageClickHandler(0);
-  }
-
-  function goPrev() {
-    pageClickHandler(activePage - 1);
-  }
-
-  function goNext() {
-    pageClickHandler(activePage + 1);
-  }
-
-  function goLast() {
-    pageClickHandler(pages.length - 1);
-  }
+  const goFirst = useCallback(() => pageClickHandler(0), [pageClickHandler]);
+  const goPrev = useCallback(() => pageClickHandler(activePage - 1), [activePage, pageClickHandler]);
+  const goNext = useCallback(() => pageClickHandler(activePage + 1), [activePage, pageClickHandler]);
+  const goLast = useCallback(() => pageClickHandler(pages.length - 1), [pages, pageClickHandler]);
 
   useEffect(() => {
     const createdPages = Array.from({ length: info.pages }, (_, i) => {
