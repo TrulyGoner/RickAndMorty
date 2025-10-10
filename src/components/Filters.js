@@ -42,16 +42,7 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  },
-  [
-    name,
-    status,
-    gender,
-    species,
-    setActivePage,
-    setApiURL,
-    url
-  ]);
+  }, [name, status, gender, species, setActivePage, setApiURL, url]);
 
   const clearFilters = useCallback(() => {
     const next = new URL(url.toString());
@@ -65,12 +56,7 @@ export function Filters() {
 
     setActivePage(0);
     setApiURL(next.toString());
-  },
-  [
-    setActivePage,
-    setApiURL,
-    url
-  ]);
+  }, [setActivePage, setApiURL, url]);
 
   return (
     <Form onSubmit={applyFilters}>
