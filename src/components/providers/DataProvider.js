@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useCallback
+} from 'react';
 
 const API_URL = 'https://rickandmortyapi.com/api/character/';
 
@@ -43,7 +50,7 @@ export function DataProvider({ children }) {
       isError,
       info
     }),
-    [activePage, apiURL, characters, isFetching, isError, info]
+    [activePage, apiURL, characters, isFetching, isError, info, fetchData]
   );
 
   return (
