@@ -12,11 +12,12 @@ export function Card({
   type,
   gender,
   image,
-  onClickHandler
+  onClickHandler,
+  ...rest
 }) {
   const handleClick = useCallback(() => {
-    onClickHandler({ status, name, species, type, gender, image });
-  }, [onClickHandler, status, name, species, type, gender, image]);
+    onClickHandler({ status, name, species, type, gender, image, ...rest });
+  }, [onClickHandler, status, name, species, type, gender, image, rest]);
 
   return (
     <StyledCard onClick={handleClick}>
