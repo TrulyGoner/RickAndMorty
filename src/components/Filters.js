@@ -158,23 +158,28 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
-  padding: 8px 10px;
+  padding: 6px 8px;
   border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: none;
   background: transparent;
   color: #fff;
-  min-width: 140px;
+  min-width: 120px;
   outline: none;
+  font-size: 14px;
+
+  option[disabled] {
+    color: rgba(255,255,255,0.6);
+  }
 
   option {
     color: #0b1220;
     background: #fff;
   }
 
-  &:focus {
-    box-shadow: 0 0 0 4px rgba(131, 191, 70, 0.08);
-    background: transparent;
-  }
+  /* hide default arrow on some browsers to keep compact look */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 const Actions = styled.div`
