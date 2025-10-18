@@ -1,5 +1,4 @@
 import { useState, useCallback, useRef } from 'react';
-import { useState, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useData } from './providers';
 
@@ -17,44 +16,12 @@ export function Filters() {
   const [name, setName] = useState(url.searchParams.get('name') || '');
   const [status, setStatus] = useState(url.searchParams.get('status') || '');
   const [gender, setGender] = useState(url.searchParams.get('gender') || '');
-
-  const statusRef = useRef(null);
-  const genderRef = useRef(null);
-
-  // Clear handlers — when field has value the icon clears it.
-  const clearStatus = useCallback((e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    setStatus('');
-  }, []);
-
-  const clearGender = useCallback((e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    setGender('');
-  }, []);
-
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
+  const statusRef = useRef(null);
+  const genderRef = useRef(null);
   const speciesRef = useRef(null);
-
-  const focusSpecies = useCallback(() => {
-    speciesRef.current?.focus();
-  }, []);
-
-  const handleSpeciesIconClick = useCallback(
-    (e) => {
-      if (species) {
-        e?.preventDefault();
-        e?.stopPropagation();
-        setSpecies('');
-      } else {
-        focusSpecies();
-      }
-    },
-    [species, focusSpecies],
-  );
 
   const onNameChange = useCallback((e) => setName(e.target.value), []);
   const onStatusChange = useCallback((e) => setStatus(e.target.value), []);
@@ -62,49 +29,30 @@ export function Filters() {
   const onSpeciesChange = useCallback((e) => setSpecies(e.target.value), []);
   const onTypeChange = useCallback((e) => setType(e.target.value), []);
 
-  const applyFilters = useCallback(
-    (e) => {
-      e?.preventDefault();
+  const applyFilters = useCallback((e) => {
+    e?.preventDefault();
 
-      const next = new URL(url.toString());
+    const next = new URL(url.toString());
 
-      // clear existing filter params
-      next.searchParams.delete('name');
-      next.searchParams.delete('status');
-      next.searchParams.delete('gender');
-      next.searchParams.delete('species');
-      next.searchParams.delete('type');
-      next.searchParams.delete('page');
+    next.searchParams.delete('name');
+    next.searchParams.delete('status');
+    next.searchParams.delete('gender');
+    next.searchParams.delete('species');
+    next.searchParams.delete('type');
+    next.searchParams.delete('page');
 
-      if (name.trim()) {
-        next.searchParams.set('name', name.trim());
-      }
+    if (name.trim()) next.searchParams.set('name', name.trim());
+    if (status) next.searchParams.set('status', status);
+    if (gender) next.searchParams.set('gender', gender);
+    if (species.trim()) next.searchParams.set('species', species.trim());
+    if (type.trim()) next.searchParams.set('type', type.trim());
 
-      if (status) {
-        next.searchParams.set('status', status);
-      }
-
-      if (gender) {
-        next.searchParams.set('gender', gender);
-      }
-
-      if (species.trim()) {
-        next.searchParams.set('species', species.trim());
-      }
-
-      if (type.trim()) {
-        next.searchParams.set('type', type.trim());
-      }
-
-      setActivePage(0);
-      setApiURL(next.toString());
-    },
-    [name, status, gender, species, type, setActivePage, setApiURL, url]
-  );
+    setActivePage(0);
+    setApiURL(next.toString());
+  }, [name, status, gender, species, type, setActivePage, setApiURL, url]);
 
   const clearFilters = useCallback(() => {
     const next = new URL(url.toString());
-
     next.search = '';
 
     setName('');
@@ -117,27 +65,30 @@ export function Filters() {
     setApiURL(next.toString());
   }, [setActivePage, setApiURL, url]);
 
-  // helpers to clear individual fields
-  const clearField = useCallback(
-    (fieldSetter) => (e) => {
-      // Prevent the native select dropdown from opening when clearing
+  const clearField = useCallback((setter) => (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setter('');
+  }, []);
+
+  const clearStatus = useCallback(() => setStatus(''), []);
+  const clearGender = useCallback(() => setGender(''), []);
+  const focusSpecies = useCallback(() => speciesRef.current?.focus(), []);
+  const handleSpeciesIconClick = useCallback((e) => {
+    if (species) {
       e?.preventDefault();
       e?.stopPropagation();
-      fieldSetter('');
-    },
-    []
-  );
+      setSpecies('');
+    } else {
+      focusSpecies();
+    }
+  }, [species, focusSpecies]);
 
   return (
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select
-            ref={statusRef}
-            value={status}
-            onChange={onStatusChange}
-            aria-label="Status"
-          >
+          <Select ref={statusRef} value={status} onChange={onStatusChange} aria-label="Status">
             <option value="" disabled>
               Status
             </option>
@@ -146,64 +97,17 @@ export function Filters() {
             <option value="unknown">Unknown</option>
           </Select>
 
-          <FieldIcon
-            onClick={status ? clearStatus : undefined}
-            style={{ pointerEvents: status ? 'auto' : 'none' }}
-            title={status ? 'Clear status' : 'Open status'}
-            aria-hidden={false}
-            tabIndex={0}
-            role="button"
-          >
+          <FieldIcon onClick={status ? clearStatus : undefined} style={{ pointerEvents: status ? 'auto' : 'none' }} title={status ? 'Clear status' : 'Open status'} tabIndex={0} role="button">
             {status ? (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 6L6 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M6 6L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <SvgX />
             ) : (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <SvgChevron />
             )}
           </FieldIcon>
         </Field>
 
         <Field>
-          <Select
-            ref={genderRef}
-            value={gender}
-            onChange={onGenderChange}
-            aria-label="Gender"
-          >
+          <Select ref={genderRef} value={gender} onChange={onGenderChange} aria-label="Gender">
             <option value="" disabled>
               Gender
             </option>
@@ -213,110 +117,20 @@ export function Filters() {
             <option value="unknown">Unknown</option>
           </Select>
 
-          <FieldIcon
-            onClick={gender ? clearGender : undefined}
-            style={{ pointerEvents: gender ? 'auto' : 'none' }}
-            title={gender ? 'Clear gender' : 'Open gender'}
-            tabIndex={0}
-            role="button"
-          >
+          <FieldIcon onClick={gender ? clearGender : undefined} style={{ pointerEvents: gender ? 'auto' : 'none' }} title={gender ? 'Clear gender' : 'Open gender'} tabIndex={0} role="button">
             {gender ? (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 6L6 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M6 6L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <SvgX />
             ) : (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <SvgChevron />
             )}
           </FieldIcon>
         </Field>
 
         <Field>
           <InputWrapper>
-            <Input
-              ref={speciesRef}
-              placeholder="Species"
-              value={species}
-              onChange={onSpeciesChange}
-            />
-            <FieldIcon
-              onClick={handleSpeciesIconClick}
-              title={species ? 'Clear species' : 'Open species'}
-              tabIndex={0}
-              role="button"
-            >
-              {species ? (
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 6L6 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6 6L18 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
+            <Input ref={speciesRef} placeholder="Species" value={species} onChange={onSpeciesChange} />
+            <FieldIcon onClick={handleSpeciesIconClick} title={species ? 'Clear species' : 'Open species'} tabIndex={0} role="button">
+              {species ? <SvgX /> : <SvgChevron />}
             </FieldIcon>
           </InputWrapper>
         </Field>
@@ -327,34 +141,8 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Name" value={name} onChange={onNameChange} />
             {name ? (
-              <FieldIcon
-                onClick={clearField(setName)}
-                title="Clear name"
-                tabIndex={0}
-                role="button"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 6L6 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6 6L18 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <FieldIcon onClick={clearField(setName)} title="Clear name" tabIndex={0} role="button">
+                <SvgX />
               </FieldIcon>
             ) : null}
           </InputWrapper>
@@ -364,34 +152,8 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Type" value={type} onChange={onTypeChange} />
             {type ? (
-              <FieldIcon
-                onClick={clearField(setType)}
-                title="Clear type"
-                tabIndex={0}
-                role="button"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 6L6 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6 6L18 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <FieldIcon onClick={clearField(setType)} title="Clear type" tabIndex={0} role="button">
+                <SvgX />
               </FieldIcon>
             ) : null}
           </InputWrapper>
@@ -399,12 +161,27 @@ export function Filters() {
 
         <Actions>
           <Button type="submit">Apply</Button>
-          <ClearButton type="button" onClick={clearFilters}>
-            Clear
-          </ClearButton>
+          <ClearButton type="button" onClick={clearFilters}>Clear</ClearButton>
         </Actions>
       </BottomRow>
     </Form>
+  );
+}
+
+function SvgChevron() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SvgX() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
@@ -504,14 +281,12 @@ const Select = styled.select`
     background: #dff0c8;
   }
 
-  /* when select is focused, try to style selected option */
   &:focus option[selected],
   &:focus option:checked {
     background: #0b3547;
     color: #fff;
   }
 
-  /* hide default arrow on some browsers to keep compact look */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -612,7 +387,7 @@ const FieldIcon = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: #83bf46; /* accent color */
+    color: #83bf46;
     background: rgba(131, 191, 70, 0.06);
   }
 
