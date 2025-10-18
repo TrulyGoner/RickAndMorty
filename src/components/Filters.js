@@ -286,11 +286,11 @@ export function Filters() {
               onChange={onSpeciesChange}
             />
             <FieldIcon
-            onClick={clearField(setSpecies)}
-            title={species ? 'Clear species' : 'Species'}
-            tabIndex={0}
-            role="button"
-          >
+              onClick={clearField(setSpecies)}
+              title={species ? 'Clear species' : 'Species'}
+              tabIndex={0}
+              role="button"
+            >
               {species ? (
                 <svg
                   width="14"
