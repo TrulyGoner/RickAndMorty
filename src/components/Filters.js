@@ -30,7 +30,11 @@ export function Filters() {
         statusRef.current?.focus();
         try {
           statusRef.current?.dispatchEvent(
-            new KeyboardEvent('keydown', { key: 'ArrowDown', keyCode: 40, bubbles: true }),
+            new KeyboardEvent('keydown', {
+              key: 'ArrowDown',
+              keyCode: 40,
+              bubbles: true,
+            }),
           );
           statusRef.current?.click();
         } catch (err) {
@@ -38,7 +42,7 @@ export function Filters() {
         }
       }
     },
-    [status],
+    [status]
   );
 
   const handleGenderIconClick = useCallback(
@@ -51,7 +55,11 @@ export function Filters() {
         genderRef.current?.focus();
         try {
           genderRef.current?.dispatchEvent(
-            new KeyboardEvent('keydown', { key: 'ArrowDown', keyCode: 40, bubbles: true }),
+            new KeyboardEvent('keydown', {
+              key: 'ArrowDown',
+              keyCode: 40,
+              bubbles: true,
+            }),
           );
           genderRef.current?.click();
         } catch (err) {
@@ -59,7 +67,7 @@ export function Filters() {
         }
       }
     },
-    [gender],
+    [gender]
   );
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
@@ -156,12 +164,6 @@ export function Filters() {
 
           <FieldIcon
             onClick={handleStatusIconClick}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleStatusIconClick(e);
-              }
-            }}
             title={status ? 'Clear status' : 'Open status'}
             aria-hidden={false}
             tabIndex={0}
@@ -228,12 +230,6 @@ export function Filters() {
 
           <FieldIcon
             onClick={handleGenderIconClick}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleGenderIconClick(e);
-              }
-            }}
             title={gender ? 'Clear gender' : 'Open gender'}
             tabIndex={0}
             role="button"
@@ -289,11 +285,11 @@ export function Filters() {
               onChange={onSpeciesChange}
             />
             <FieldIcon
-              onMouseDown={clearField(setSpecies)}
-              title={species ? 'Clear species' : 'Species'}
-              tabIndex={0}
-              role="button"
-            >
+            onClick={clearField(setSpecies)}
+            title={species ? 'Clear species' : 'Species'}
+            tabIndex={0}
+            role="button"
+          >
               {species ? (
                 <svg
                   width="14"
@@ -344,7 +340,7 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Name" value={name} onChange={onNameChange} />
             <FieldIcon
-              onMouseDown={clearField(setName)}
+              onClick={clearField(setName)}
               title={name ? 'Clear name' : 'Name'}
               tabIndex={0}
               role="button"
@@ -397,7 +393,7 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Type" value={type} onChange={onTypeChange} />
             <FieldIcon
-              onMouseDown={clearField(setType)}
+              onClick={clearField(setType)}
               title={type ? 'Clear type' : 'Type'}
               tabIndex={0}
               role="button"
