@@ -82,7 +82,11 @@ export function Filters() {
 
   const clearStatus = useCallback(() => setStatus(''), []);
   const clearGender = useCallback(() => setGender(''), []);
-  const focusSpecies = useCallback(() => speciesRef.current?.focus(), []);
+
+  const focusSpecies = useCallback(() => {
+    speciesRef.current?.focus();
+  }, []);
+
   const handleSpeciesIconClick = useCallback(
     (e) => {
       if (species) {
@@ -171,7 +175,9 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Name" value={name} onChange={onNameChange} />
             {name ? (
-              <FieldIcon onClick={clearField(setName)} title="Clear name" tabIndex={0} role="button">{<SvgX />}</FieldIcon>
+              <FieldIcon onClick={clearField(setName)} title="Clear name" tabIndex={0} role="button">
+                <SvgX />
+              </FieldIcon>
             ) : null}
           </InputWrapper>
         </Field>
@@ -180,7 +186,9 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Type" value={type} onChange={onTypeChange} />
             {type ? (
-              <FieldIcon onClick={clearField(setType)} title="Clear type" tabIndex={0} role="button">{<SvgX />}</FieldIcon>
+              <FieldIcon onClick={clearField(setType)} title="Clear type" tabIndex={0} role="button">
+                <SvgX />
+              </FieldIcon>
             ) : null}
           </InputWrapper>
         </Field>
@@ -196,17 +204,47 @@ export function Filters() {
 
 function SvgChevron() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 9L12 15L18 9"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
 function SvgX() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18 6L6 18"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 6L18 18"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
