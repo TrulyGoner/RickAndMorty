@@ -213,11 +213,7 @@ export function Filters() {
 
         <Field>
           <InputWrapper>
-            <Input
-              placeholder="Species"
-              value={species}
-              onChange={onSpeciesChange}
-            />
+            <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
             <FieldIcon
               onMouseDown={clearField(setSpecies)}
               title={species ? 'Clear species' : 'Species'}
