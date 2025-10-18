@@ -29,14 +29,10 @@ export function Filters() {
       } else {
         statusRef.current?.focus();
         try {
-          statusRef.current?.dispatchEvent(
-            new KeyboardEvent('keydown', {
-              key: 'ArrowDown',
-              keyCode: 40,
-              bubbles: true
-            })
-          );
-          statusRef.current?.click();
+          const el = statusRef.current;
+          el?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+          el?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+          el?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         } catch (err) {
           // ignore
         }
@@ -54,14 +50,10 @@ export function Filters() {
       } else {
         genderRef.current?.focus();
         try {
-          genderRef.current?.dispatchEvent(
-            new KeyboardEvent('keydown', {
-              key: 'ArrowDown',
-              keyCode: 40,
-              bubbles: true
-            })
-          );
-          genderRef.current?.click();
+          const el = genderRef.current;
+          el?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+          el?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+          el?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         } catch (err) {
           // ignore
         }
