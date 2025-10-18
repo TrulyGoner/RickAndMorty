@@ -55,22 +55,19 @@ export function Filters() {
     [name, status, gender, species, type, setActivePage, setApiURL, url]
   );
 
-  const clearFilters = useCallback(
-    () => {
-      const next = new URL(url.toString());
-      next.search = '';
+  const clearFilters = useCallback(() => {
+    const next = new URL(url.toString());
+    next.search = '';
 
-      setName('');
-      setStatus('');
-      setGender('');
-      setSpecies('');
-      setType('');
+    setName('');
+    setStatus('');
+    setGender('');
+    setSpecies('');
+    setType('');
 
-      setActivePage(0);
-      setApiURL(next.toString());
-    },
-    [setActivePage, setApiURL, url]
-  );
+    setActivePage(0);
+    setApiURL(next.toString());
+  }, [setActivePage, setApiURL, url]);
 
   const clearField = useCallback(
     (setter) => (e) => {
@@ -125,7 +122,9 @@ export function Filters() {
             title={status ? 'Clear status' : 'Open status'}
             tabIndex={0}
             role="button"
-          >{status ? <SvgX /> : <SvgChevron />}</FieldIcon>
+          >
+            {status ? <SvgX /> : <SvgChevron />}
+          </FieldIcon>
         </Field>
 
         <Field>
@@ -150,7 +149,9 @@ export function Filters() {
             title={gender ? 'Clear gender' : 'Open gender'}
             tabIndex={0}
             role="button"
-          >{gender ? <SvgX /> : <SvgChevron />}</FieldIcon>
+          >
+            {gender ? <SvgX /> : <SvgChevron />}
+          </FieldIcon>
         </Field>
 
         <Field>
@@ -166,7 +167,9 @@ export function Filters() {
               title={species ? 'Clear species' : 'Open species'}
               tabIndex={0}
               role="button"
-            >{species ? <SvgX /> : <SvgChevron />}</FieldIcon>
+            >
+              {species ? <SvgX /> : <SvgChevron />}
+            </FieldIcon>
           </InputWrapper>
         </Field>
       </TopRow>
@@ -176,7 +179,12 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Name" value={name} onChange={onNameChange} />
             {name ? (
-              <FieldIcon onClick={clearField(setName)} title="Clear name" tabIndex={0} role="button">
+              <FieldIcon
+                onClick={clearField(setName)}
+                title="Clear name"
+                tabIndex={0}
+                role="button"
+              >
                 <SvgX />
               </FieldIcon>
             ) : null}
@@ -187,7 +195,12 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Type" value={type} onChange={onTypeChange} />
             {type ? (
-              <FieldIcon onClick={clearField(setType)} title="Clear type" tabIndex={0} role="button">
+              <FieldIcon
+                onClick={clearField(setType)}
+                title="Clear type"
+                tabIndex={0}
+                role="button"
+              >
                 <SvgX />
               </FieldIcon>
             ) : null}
@@ -196,7 +209,9 @@ export function Filters() {
 
         <Actions>
           <Button type="submit">Apply</Button>
-          <ClearButton type="button" onClick={clearFilters}>Clear</ClearButton>
+          <ClearButton type="button" onClick={clearFilters}>
+            Clear
+          </ClearButton>
         </Actions>
       </BottomRow>
     </Form>
