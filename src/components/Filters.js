@@ -88,7 +88,7 @@ export function Filters() {
       e?.stopPropagation();
       fieldSetter('');
     },
-    [],
+    []
   );
 
   return (
