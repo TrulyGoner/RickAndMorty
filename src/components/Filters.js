@@ -250,13 +250,13 @@ export function Filters() {
               value={species}
               onChange={onSpeciesChange}
             />
-            <FieldIcon
-              onClick={clearField(setSpecies)}
-              title={species ? 'Clear species' : 'Species'}
-              tabIndex={0}
-              role="button"
-            >
-              {species ? (
+            {species ? (
+              <FieldIcon
+                onClick={clearField(setSpecies)}
+                title="Clear species"
+                tabIndex={0}
+                role="button"
+              >
                 <svg
                   width="14"
                   height="14"
@@ -279,24 +279,8 @@ export function Filters() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              ) : (
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
-            </FieldIcon>
+              </FieldIcon>
+            ) : null}
           </InputWrapper>
         </Field>
       </TopRow>
@@ -305,13 +289,13 @@ export function Filters() {
         <Field>
           <InputWrapper>
             <Input placeholder="Name" value={name} onChange={onNameChange} />
-            <FieldIcon
-              onClick={clearField(setName)}
-              title={name ? 'Clear name' : 'Name'}
-              tabIndex={0}
-              role="button"
-            >
-              {name ? (
+            {name ? (
+              <FieldIcon
+                onClick={clearField(setName)}
+                title="Clear name"
+                tabIndex={0}
+                role="button"
+              >
                 <svg
                   width="14"
                   height="14"
@@ -334,37 +318,21 @@ export function Filters() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              ) : (
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
-            </FieldIcon>
+              </FieldIcon>
+            ) : null}
           </InputWrapper>
         </Field>
 
         <Field>
           <InputWrapper>
             <Input placeholder="Type" value={type} onChange={onTypeChange} />
-            <FieldIcon
-              onClick={clearField(setType)}
-              title={type ? 'Clear type' : 'Type'}
-              tabIndex={0}
-              role="button"
-            >
-              {type ? (
+            {type ? (
+              <FieldIcon
+                onClick={clearField(setType)}
+                title="Clear type"
+                tabIndex={0}
+                role="button"
+              >
                 <svg
                   width="14"
                   height="14"
@@ -387,24 +355,8 @@ export function Filters() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              ) : (
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
-            </FieldIcon>
+              </FieldIcon>
+            ) : null}
           </InputWrapper>
         </Field>
 
