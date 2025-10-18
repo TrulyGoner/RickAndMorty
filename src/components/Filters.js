@@ -20,35 +20,41 @@ export function Filters() {
   const statusRef = useRef(null);
   const genderRef = useRef(null);
 
-  const handleStatusIconMouseDown = useCallback((e) => {
-    e.preventDefault();
-    if (status) {
-      e.stopPropagation();
-      setStatus('');
-    } else {
-      statusRef.current?.focus();
-      try {
-        statusRef.current?.click();
-      } catch (err) {
-        // ignore
+  const handleStatusIconMouseDown = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (status) {
+        e.stopPropagation();
+        setStatus('');
+      } else {
+        statusRef.current?.focus();
+        try {
+          statusRef.current?.click();
+        } catch (err) {
+          // ignore
+        }
       }
-    }
-  }, [status]);
+    },
+    [status],
+  );
 
-  const handleGenderIconMouseDown = useCallback((e) => {
-    e.preventDefault();
-    if (gender) {
-      e.stopPropagation();
-      setGender('');
-    } else {
-      genderRef.current?.focus();
-      try {
-        genderRef.current?.click();
-      } catch (err) {
-        // ignore
+  const handleGenderIconMouseDown = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (gender) {
+        e.stopPropagation();
+        setGender('');
+      } else {
+        genderRef.current?.focus();
+        try {
+          genderRef.current?.click();
+        } catch (err) {
+          // ignore
+        }
       }
-    }
-  }, [gender]);
+    },
+    [gender],
+  );
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
