@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useData } from './providers';
 
@@ -19,6 +20,23 @@ export function Filters() {
 
   const statusRef = useRef(null);
   const genderRef = useRef(null);
+
+  // Clear handlers — when field has value the icon clears it.
+  const clearStatus = useCallback((e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setStatus('');
+  }, []);
+
+  const clearGender = useCallback((e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setGender('');
+  }, []);
+
+  const [species, setSpecies] = useState(url.searchParams.get('species') || '');
+  const [type, setType] = useState(url.searchParams.get('type') || '');
+
   const speciesRef = useRef(null);
 
   const focusSpecies = useCallback(() => {
@@ -37,22 +55,6 @@ export function Filters() {
     },
     [species, focusSpecies],
   );
-
-  // Clear handlers — when field has value the icon clears it.
-  const clearStatus = useCallback((e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    setStatus('');
-  }, []);
-
-  const clearGender = useCallback((e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    setGender('');
-  }, []);
-
-  const [species, setSpecies] = useState(url.searchParams.get('species') || '');
-  const [type, setType] = useState(url.searchParams.get('type') || '');
 
   const onNameChange = useCallback((e) => setName(e.target.value), []);
   const onStatusChange = useCallback((e) => setStatus(e.target.value), []);
