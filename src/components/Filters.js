@@ -39,16 +39,39 @@ export function Filters() {
       next.searchParams.delete('type');
       next.searchParams.delete('page');
 
-      if (name.trim()) next.searchParams.set('name', name.trim());
-      if (status) next.searchParams.set('status', status);
-      if (gender) next.searchParams.set('gender', gender);
-      if (species.trim()) next.searchParams.set('species', species.trim());
-      if (type.trim()) next.searchParams.set('type', type.trim());
+      if (name.trim()) {
+        next.searchParams.set('name', name.trim());
+      }
+
+      if (status) {
+        next.searchParams.set('status', status);
+      }
+
+      if (gender) {
+        next.searchParams.set('gender', gender);
+      }
+
+      if (species.trim()) {
+        next.searchParams.set('species', species.trim());
+      }
+
+      if (type.trim()) {
+        next.searchParams.set('type', type.trim());
+      }
 
       setActivePage(0);
       setApiURL(next.toString());
     },
-    [name, status, gender, species, type, setActivePage, setApiURL, url]
+    [
+      name,
+      status,
+      gender,
+      species,
+      type,
+      setActivePage,
+      setApiURL,
+      url,
+    ],
   );
 
   const clearFilters = useCallback(() => {
@@ -78,7 +101,11 @@ export function Filters() {
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select value={status} onChange={onStatusChange} aria-label="Status">
+          <Select
+            value={status}
+            onChange={onStatusChange}
+            aria-label="Status"
+          >
             <option value="" disabled>
               Status
             </option>
@@ -95,20 +122,54 @@ export function Filters() {
             role="button"
           >
             {status ? (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             ) : (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             )}
           </FieldIcon>
         </Field>
 
         <Field>
-          <Select value={gender} onChange={onGenderChange} aria-label="Gender">
+          <Select
+            value={gender}
+            onChange={onGenderChange}
+            aria-label="Gender"
+          >
             <option value="" disabled>
               Gender
             </option>
@@ -125,13 +186,43 @@ export function Filters() {
             role="button"
           >
             {gender ? (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             ) : (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             )}
           </FieldIcon>
@@ -139,7 +230,11 @@ export function Filters() {
 
         <Field>
           <InputWrapper>
-            <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
+            <Input
+              placeholder="Species"
+              value={species}
+              onChange={onSpeciesChange}
+            />
             <FieldIcon
               onMouseDown={clearField(setSpecies)}
               title={species ? 'Clear species' : 'Species'}
@@ -147,13 +242,43 @@ export function Filters() {
               role="button"
             >
               {species ? (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6L6 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M6 6L18 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               ) : (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               )}
             </FieldIcon>
@@ -164,7 +289,11 @@ export function Filters() {
       <BottomRow>
         <Field>
           <InputWrapper>
-            <Input placeholder="Name" value={name} onChange={onNameChange} />
+            <Input
+              placeholder="Name"
+              value={name}
+              onChange={onNameChange}
+            />
             <FieldIcon
               onMouseDown={clearField(setName)}
               title={name ? 'Clear name' : 'Name'}
@@ -172,13 +301,43 @@ export function Filters() {
               role="button"
             >
               {name ? (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6L6 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M6 6L18 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               ) : (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               )}
             </FieldIcon>
@@ -187,7 +346,11 @@ export function Filters() {
 
         <Field>
           <InputWrapper>
-            <Input placeholder="Type" value={type} onChange={onTypeChange} />
+            <Input
+              placeholder="Type"
+              value={type}
+              onChange={onTypeChange}
+            />
             <FieldIcon
               onMouseDown={clearField(setType)}
               title={type ? 'Clear type' : 'Type'}
@@ -195,13 +358,43 @@ export function Filters() {
               role="button"
             >
               {type ? (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6L6 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M6 6L18 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               ) : (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               )}
             </FieldIcon>
@@ -241,10 +434,10 @@ const Form = styled.form`
 const Field = styled.div`
   display: inline-flex;
   align-items: center;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
   padding: 6px 8px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   min-width: 140px;
   position: relative;
 
@@ -273,7 +466,7 @@ const Input = styled.input`
   width: 100%;
 
   &::placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
   }
 
   &:focus {
@@ -293,7 +486,7 @@ const Select = styled.select`
   width: 100%;
 
   option[disabled] {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
   }
 
   option {
@@ -366,7 +559,7 @@ const Button = styled.button`
   box-shadow: none;
 
   &:hover {
-    background: rgba(131,191,70,0.08);
+    background: rgba(131, 191, 70, 0.08);
   }
 `;
 
@@ -380,7 +573,7 @@ const ClearButton = styled.button`
   font-weight: 600;
 
   &:hover {
-    background: rgba(255,77,79,0.08);
+    background: rgba(255, 77, 79, 0.08);
   }
 `;
 
@@ -398,16 +591,16 @@ const FieldIcon = styled.button`
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 
   &:hover {
     color: #83bf46; /* accent color */
-    background: rgba(131,191,70,0.06);
+    background: rgba(131, 191, 70, 0.06);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(131,191,70,0.12);
+    box-shadow: 0 0 0 2px rgba(131, 191, 70, 0.12);
   }
 `;
