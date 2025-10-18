@@ -20,77 +20,18 @@ export function Filters() {
   const statusRef = useRef(null);
   const genderRef = useRef(null);
 
-  const handleStatusIconClick = useCallback(
-    (e) => {
-      if (status) {
-        e.preventDefault();
-        e.stopPropagation();
-        setStatus('');
-      } else {
-        statusRef.current?.focus();
-        try {
-          const el = statusRef.current;
-          el?.dispatchEvent(
-            new MouseEvent('mousedown', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          el?.dispatchEvent(
-            new MouseEvent('mouseup', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          el?.dispatchEvent(
-            new MouseEvent('click', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-        } catch (err) {
-          // ignore
-        }
-      }
-    },
-    [status]
-  );
+  // Clear handlers — when field has value the icon clears it.
+  const clearStatus = useCallback((e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setStatus('');
+  }, []);
 
-  const handleGenderIconClick = useCallback(
-    (e) => {
-      if (gender) {
-        e.preventDefault();
-        e.stopPropagation();
-        setGender('');
-      } else {
-        genderRef.current?.focus();
-        try {
-          const el = genderRef.current;
-          el?.dispatchEvent(
-            new MouseEvent('mousedown', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          el?.dispatchEvent(
-            new MouseEvent('mouseup', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          el?.dispatchEvent(
-            new MouseEvent('click', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-        } catch (err) {
-          // ignore
-        }
-      }
-    },
-    [gender]
-  );
+  const clearGender = useCallback((e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setGender('');
+  }, []);
 
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
