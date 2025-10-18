@@ -36,7 +36,7 @@ export function Filters() {
       }
     },
     [status]
-    );
+  );
 
   const handleGenderIconMouseDown = useCallback(
     (e) => {
@@ -54,7 +54,7 @@ export function Filters() {
       }
     },
     [gender]
-    );
+  );
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
