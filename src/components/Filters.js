@@ -20,40 +20,46 @@ export function Filters() {
   const statusRef = useRef(null);
   const genderRef = useRef(null);
 
-  const handleStatusIconMouseDown = useCallback(
+  const handleStatusIconClick = useCallback(
     (e) => {
-      e.preventDefault();
       if (status) {
+        e.preventDefault();
         e.stopPropagation();
         setStatus('');
       } else {
         statusRef.current?.focus();
         try {
+          statusRef.current?.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowDown', keyCode: 40, bubbles: true }),
+          );
           statusRef.current?.click();
         } catch (err) {
           // ignore
         }
       }
     },
-    [status]
+    [status],
   );
 
-  const handleGenderIconMouseDown = useCallback(
+  const handleGenderIconClick = useCallback(
     (e) => {
-      e.preventDefault();
       if (gender) {
+        e.preventDefault();
         e.stopPropagation();
         setGender('');
       } else {
         genderRef.current?.focus();
         try {
+          genderRef.current?.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowDown', keyCode: 40, bubbles: true }),
+          );
           genderRef.current?.click();
         } catch (err) {
           // ignore
         }
       }
     },
-    [gender]
+    [gender],
   );
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
@@ -149,7 +155,13 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onMouseDown={handleStatusIconMouseDown}
+            onClick={handleStatusIconClick}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleStatusIconClick(e);
+              }
+            }}
             title={status ? 'Clear status' : 'Open status'}
             aria-hidden={false}
             tabIndex={0}
@@ -215,7 +227,13 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onMouseDown={handleGenderIconMouseDown}
+            onClick={handleGenderIconClick}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleGenderIconClick(e);
+              }
+            }}
             title={gender ? 'Clear gender' : 'Open gender'}
             tabIndex={0}
             role="button"
