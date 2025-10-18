@@ -40,13 +40,13 @@ export function Filters() {
             new MouseEvent('mouseup', {
               bubbles: true,
               cancelable: true,
-            }),
+            })
           );
           el?.dispatchEvent(
             new MouseEvent('click', {
               bubbles: true,
               cancelable: true,
-            }),
+            })
           );
         } catch (err) {
           // ignore
