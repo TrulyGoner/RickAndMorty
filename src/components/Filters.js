@@ -66,11 +66,19 @@ export function Filters() {
     setApiURL(next.toString());
   }, [setActivePage, setApiURL, url]);
 
+  // helpers to clear individual fields
+  const clearField = useCallback((fieldSetter) => (e) => {
+    // Prevent the native select dropdown from opening when clearing
+    e?.preventDefault();
+    e?.stopPropagation();
+    fieldSetter('');
+  }, []);
+
   return (
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select value={status} onChange={onStatusChange}>
+          <Select value={status} onChange={onStatusChange} aria-label="Status">
             <option value="" disabled>
               Status
             </option>
@@ -78,10 +86,29 @@ export function Filters() {
             <option value="dead">Dead</option>
             <option value="unknown">Unknown</option>
           </Select>
+
+          <FieldIcon
+            onMouseDown={clearField(setStatus)}
+            title={status ? 'Clear status' : 'Open status'}
+            aria-hidden={false}
+            tabIndex={0}
+            role="button"
+          >
+            {status ? (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </FieldIcon>
         </Field>
 
         <Field>
-          <Select value={gender} onChange={onGenderChange}>
+          <Select value={gender} onChange={onGenderChange} aria-label="Gender">
             <option value="" disabled>
               Gender
             </option>
@@ -90,20 +117,95 @@ export function Filters() {
             <option value="genderless">Genderless</option>
             <option value="unknown">Unknown</option>
           </Select>
+
+          <FieldIcon
+            onMouseDown={clearField(setGender)}
+            title={gender ? 'Clear gender' : 'Open gender'}
+            tabIndex={0}
+            role="button"
+          >
+            {gender ? (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </FieldIcon>
         </Field>
 
         <Field>
-          <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
+          <InputWrapper>
+            <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
+            <FieldIcon
+              onMouseDown={clearField(setSpecies)}
+              title={species ? 'Clear species' : 'Species'}
+              tabIndex={0}
+              role="button"
+            >
+              {species ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </FieldIcon>
+          </InputWrapper>
         </Field>
       </TopRow>
 
       <BottomRow>
         <Field>
-          <Input placeholder="Name" value={name} onChange={onNameChange} />
+          <InputWrapper>
+            <Input placeholder="Name" value={name} onChange={onNameChange} />
+            <FieldIcon
+              onMouseDown={clearField(setName)}
+              title={name ? 'Clear name' : 'Name'}
+              tabIndex={0}
+              role="button"
+            >
+              {name ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </FieldIcon>
+          </InputWrapper>
         </Field>
 
         <Field>
-          <Input placeholder="Type" value={type} onChange={onTypeChange} />
+          <InputWrapper>
+            <Input placeholder="Type" value={type} onChange={onTypeChange} />
+            <FieldIcon
+              onMouseDown={clearField(setType)}
+              title={type ? 'Clear type' : 'Type'}
+              tabIndex={0}
+              role="button"
+            >
+              {type ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </FieldIcon>
+          </InputWrapper>
         </Field>
 
         <Actions>
@@ -144,12 +246,19 @@ const Field = styled.div`
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.04);
   min-width: 140px;
+  position: relative;
 
   @media (max-width: 600px) {
     min-width: auto;
     width: 100%;
     justify-content: stretch;
   }
+`;
+
+const InputWrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
 `;
 
 const Input = styled.input`
@@ -161,6 +270,7 @@ const Input = styled.input`
   color: #fff;
   outline: none;
   font-size: 14px;
+  width: 100%;
 
   &::placeholder {
     color: rgba(255,255,255,0.6);
@@ -180,6 +290,7 @@ const Select = styled.select`
   min-width: 120px;
   outline: none;
   font-size: 14px;
+  width: 100%;
 
   option[disabled] {
     color: rgba(255,255,255,0.6);
@@ -270,5 +381,33 @@ const ClearButton = styled.button`
 
   &:hover {
     background: rgba(255,77,79,0.08);
+  }
+`;
+
+const FieldIcon = styled.button`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+
+  &:hover {
+    color: #83bf46; /* accent color */
+    background: rgba(131,191,70,0.06);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(131,191,70,0.12);
   }
 `;
