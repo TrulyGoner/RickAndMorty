@@ -62,17 +62,7 @@ export function Filters() {
       setActivePage(0);
       setApiURL(next.toString());
     },
-    [
-      name,
-      status,
-      gender,
-      species,
-      type,
-      setActivePage,
-      setApiURL,
-      url,
-    ],
-  );
+[name, status, gender, species, type, setActivePage, setApiURL, url], );
 
   const clearFilters = useCallback(() => {
     const next = new URL(url.toString());
@@ -101,11 +91,7 @@ export function Filters() {
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select
-            value={status}
-            onChange={onStatusChange}
-            aria-label="Status"
-          >
+          <Select value={status} onChange={onStatusChange} aria-label="Status">
             <option value="" disabled>
               Status
             </option>
@@ -165,11 +151,7 @@ export function Filters() {
         </Field>
 
         <Field>
-          <Select
-            value={gender}
-            onChange={onGenderChange}
-            aria-label="Gender"
-          >
+          <Select value={gender} onChange={onGenderChange} aria-label="Gender">
             <option value="" disabled>
               Gender
             </option>
@@ -289,11 +271,7 @@ export function Filters() {
       <BottomRow>
         <Field>
           <InputWrapper>
-            <Input
-              placeholder="Name"
-              value={name}
-              onChange={onNameChange}
-            />
+            <Input placeholder="Name" value={name} onChange={onNameChange} />
             <FieldIcon
               onMouseDown={clearField(setName)}
               title={name ? 'Clear name' : 'Name'}
@@ -346,11 +324,7 @@ export function Filters() {
 
         <Field>
           <InputWrapper>
-            <Input
-              placeholder="Type"
-              value={type}
-              onChange={onTypeChange}
-            />
+            <Input placeholder="Type" value={type} onChange={onTypeChange} />
             <FieldIcon
               onMouseDown={clearField(setType)}
               title={type ? 'Clear type' : 'Type'}
