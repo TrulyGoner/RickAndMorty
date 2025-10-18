@@ -35,8 +35,8 @@ export function Filters() {
         }
       }
     },
-    [status],
-  );
+    [status]
+    );
 
   const handleGenderIconMouseDown = useCallback(
     (e) => {
