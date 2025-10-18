@@ -51,7 +51,7 @@ export function Filters() {
       setActivePage(0);
       setApiURL(next.toString());
     },
-    [name, status, gender, species, type, setActivePage, setApiURL, url],
+    [name, status, gender, species, type, setActivePage, setApiURL, url]
   );
 
   const clearFilters = useCallback(
@@ -68,7 +68,7 @@ export function Filters() {
       setActivePage(0);
       setApiURL(next.toString());
     },
-    [setActivePage, setApiURL, url],
+    [setActivePage, setApiURL, url]
   );
 
   const clearField = useCallback(
@@ -77,7 +77,7 @@ export function Filters() {
       e?.stopPropagation();
       setter('');
     },
-    [],
+    []
   );
 
   const clearStatus = useCallback(() => setStatus(''), []);
@@ -93,7 +93,7 @@ export function Filters() {
         focusSpecies();
       }
     },
-    [species, focusSpecies],
+    [species, focusSpecies]
   );
 
   return (
