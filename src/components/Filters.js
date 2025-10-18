@@ -58,8 +58,8 @@ export function Filters() {
             new KeyboardEvent('keydown', {
               key: 'ArrowDown',
               keyCode: 40,
-              bubbles: true,
-            }),
+              bubbles: true
+            })
           );
           genderRef.current?.click();
         } catch (err) {
