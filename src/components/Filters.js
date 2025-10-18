@@ -70,19 +70,6 @@ export function Filters() {
     [gender]
   );
 
-  const handleStatusIconKeyDown = useCallback((e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleStatusIconClick(e);
-    }
-  }, [handleStatusIconClick]);
-
-  const handleGenderIconKeyDown = useCallback((e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleGenderIconClick(e);
-    }
-  }, [handleGenderIconClick]);
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
