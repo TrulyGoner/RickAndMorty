@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useData } from './providers';
 
@@ -16,6 +16,9 @@ export function Filters() {
   const [name, setName] = useState(url.searchParams.get('name') || '');
   const [status, setStatus] = useState(url.searchParams.get('status') || '');
   const [gender, setGender] = useState(url.searchParams.get('gender') || '');
+
+  const statusRef = useRef(null);
+  const genderRef = useRef(null);
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
@@ -95,7 +98,7 @@ export function Filters() {
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select value={status} onChange={onStatusChange} aria-label="Status">
+          <Select ref={statusRef} value={status} onChange={onStatusChange} aria-label="Status">
             <option value="" disabled>
               Status
             </option>
@@ -105,7 +108,22 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onMouseDown={clearField(setStatus)}
+            onMouseDown={(e) => {
+              // keep native behavior: open select when empty, clear when value exists
+              e.preventDefault();
+              if (status) {
+                e.stopPropagation();
+                setStatus('');
+              } else {
+                statusRef.current?.focus();
+                // programmatically open native select in some browsers
+                try {
+                  statusRef.current?.click();
+                } catch (err) {
+                  // ignore
+                }
+              }
+            }}
             title={status ? 'Clear status' : 'Open status'}
             aria-hidden={false}
             tabIndex={0}
@@ -155,7 +173,7 @@ export function Filters() {
         </Field>
 
         <Field>
-          <Select value={gender} onChange={onGenderChange} aria-label="Gender">
+          <Select ref={genderRef} value={gender} onChange={onGenderChange} aria-label="Gender">
             <option value="" disabled>
               Gender
             </option>
@@ -166,7 +184,20 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onMouseDown={clearField(setGender)}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              if (gender) {
+                e.stopPropagation();
+                setGender('');
+              } else {
+                genderRef.current?.focus();
+                try {
+                  genderRef.current?.click();
+                } catch (err) {
+                  // ignore
+                }
+              }
+            }}
             title={gender ? 'Clear gender' : 'Open gender'}
             tabIndex={0}
             role="button"
@@ -419,6 +450,11 @@ const Field = styled.div`
   min-width: 140px;
   position: relative;
 
+  &:focus-within {
+    background: rgba(131, 191, 70, 0.04);
+    border-color: #83bf46;
+  }
+
   @media (max-width: 600px) {
     min-width: auto;
     width: 100%;
@@ -470,6 +506,22 @@ const Select = styled.select`
   option {
     color: #0b1220;
     background: #fff;
+  }
+
+  option:hover {
+    background: #eaf7dd;
+  }
+
+  option:checked,
+  option[selected] {
+    background: #dff0c8;
+  }
+
+  /* when select is focused, try to style selected option */
+  &:focus option[selected],
+  &:focus option:checked {
+    background: #0b3547;
+    color: #fff;
   }
 
   /* hide default arrow on some browsers to keep compact look */
