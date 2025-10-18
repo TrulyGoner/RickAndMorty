@@ -70,19 +70,19 @@ export function Filters() {
             new MouseEvent('mousedown', {
               bubbles: true,
               cancelable: true,
-            }),
+            })
           );
           el?.dispatchEvent(
             new MouseEvent('mouseup', {
               bubbles: true,
               cancelable: true,
-            }),
+            })
           );
           el?.dispatchEvent(
             new MouseEvent('click', {
               bubbles: true,
               cancelable: true,
-            }),
+            })
           );
         } catch (err) {
           // ignore
