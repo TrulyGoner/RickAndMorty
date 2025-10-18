@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useData } from './providers';
 
@@ -19,6 +20,24 @@ export function Filters() {
 
   const statusRef = useRef(null);
   const genderRef = useRef(null);
+  const speciesRef = useRef(null);
+
+  const focusSpecies = useCallback(() => {
+    speciesRef.current?.focus();
+  }, []);
+
+  const handleSpeciesIconClick = useCallback(
+    (e) => {
+      if (species) {
+        e?.preventDefault();
+        e?.stopPropagation();
+        setSpecies('');
+      } else {
+        focusSpecies();
+      }
+    },
+    [species, focusSpecies],
+  );
 
   // Clear handlers — when field has value the icon clears it.
   const clearStatus = useCallback((e) => {
@@ -246,17 +265,18 @@ export function Filters() {
         <Field>
           <InputWrapper>
             <Input
+              ref={speciesRef}
               placeholder="Species"
               value={species}
               onChange={onSpeciesChange}
             />
-            {species ? (
-              <FieldIcon
-                onClick={clearField(setSpecies)}
-                title="Clear species"
-                tabIndex={0}
-                role="button"
-              >
+            <FieldIcon
+              onClick={handleSpeciesIconClick}
+              title={species ? 'Clear species' : 'Open species'}
+              tabIndex={0}
+              role="button"
+            >
+              {species ? (
                 <svg
                   width="14"
                   height="14"
@@ -279,8 +299,24 @@ export function Filters() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </FieldIcon>
-            ) : null}
+              ) : (
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+            </FieldIcon>
           </InputWrapper>
         </Field>
       </TopRow>
