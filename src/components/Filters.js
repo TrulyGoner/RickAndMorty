@@ -30,9 +30,24 @@ export function Filters() {
         statusRef.current?.focus();
         try {
           const el = statusRef.current;
-          el?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-          el?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
-          el?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+          el?.dispatchEvent(
+            new MouseEvent('mousedown', {
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
+          el?.dispatchEvent(
+            new MouseEvent('mouseup', {
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
+          el?.dispatchEvent(
+            new MouseEvent('click', {
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
         } catch (err) {
           // ignore
         }
@@ -51,9 +66,24 @@ export function Filters() {
         genderRef.current?.focus();
         try {
           const el = genderRef.current;
-          el?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-          el?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
-          el?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+          el?.dispatchEvent(
+            new MouseEvent('mousedown', {
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
+          el?.dispatchEvent(
+            new MouseEvent('mouseup', {
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
+          el?.dispatchEvent(
+            new MouseEvent('click', {
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
         } catch (err) {
           // ignore
         }
