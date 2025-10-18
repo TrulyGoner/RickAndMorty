@@ -29,66 +29,83 @@ export function Filters() {
   const onSpeciesChange = useCallback((e) => setSpecies(e.target.value), []);
   const onTypeChange = useCallback((e) => setType(e.target.value), []);
 
-  const applyFilters = useCallback((e) => {
-    e?.preventDefault();
+  const applyFilters = useCallback(
+    (e) => {
+      e?.preventDefault();
 
-    const next = new URL(url.toString());
+      const next = new URL(url.toString());
 
-    next.searchParams.delete('name');
-    next.searchParams.delete('status');
-    next.searchParams.delete('gender');
-    next.searchParams.delete('species');
-    next.searchParams.delete('type');
-    next.searchParams.delete('page');
+      next.searchParams.delete('name');
+      next.searchParams.delete('status');
+      next.searchParams.delete('gender');
+      next.searchParams.delete('species');
+      next.searchParams.delete('type');
+      next.searchParams.delete('page');
 
-    if (name.trim()) next.searchParams.set('name', name.trim());
-    if (status) next.searchParams.set('status', status);
-    if (gender) next.searchParams.set('gender', gender);
-    if (species.trim()) next.searchParams.set('species', species.trim());
-    if (type.trim()) next.searchParams.set('type', type.trim());
+      if (name.trim()) next.searchParams.set('name', name.trim());
+      if (status) next.searchParams.set('status', status);
+      if (gender) next.searchParams.set('gender', gender);
+      if (species.trim()) next.searchParams.set('species', species.trim());
+      if (type.trim()) next.searchParams.set('type', type.trim());
 
-    setActivePage(0);
-    setApiURL(next.toString());
-  }, [name, status, gender, species, type, setActivePage, setApiURL, url]);
+      setActivePage(0);
+      setApiURL(next.toString());
+    },
+    [name, status, gender, species, type, setActivePage, setApiURL, url],
+  );
 
-  const clearFilters = useCallback(() => {
-    const next = new URL(url.toString());
-    next.search = '';
+  const clearFilters = useCallback(
+    () => {
+      const next = new URL(url.toString());
+      next.search = '';
 
-    setName('');
-    setStatus('');
-    setGender('');
-    setSpecies('');
-    setType('');
+      setName('');
+      setStatus('');
+      setGender('');
+      setSpecies('');
+      setType('');
 
-    setActivePage(0);
-    setApiURL(next.toString());
-  }, [setActivePage, setApiURL, url]);
+      setActivePage(0);
+      setApiURL(next.toString());
+    },
+    [setActivePage, setApiURL, url],
+  );
 
-  const clearField = useCallback((setter) => (e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    setter('');
-  }, []);
+  const clearField = useCallback(
+    (setter) => (e) => {
+      e?.preventDefault();
+      e?.stopPropagation();
+      setter('');
+    },
+    [],
+  );
 
   const clearStatus = useCallback(() => setStatus(''), []);
   const clearGender = useCallback(() => setGender(''), []);
   const focusSpecies = useCallback(() => speciesRef.current?.focus(), []);
-  const handleSpeciesIconClick = useCallback((e) => {
-    if (species) {
-      e?.preventDefault();
-      e?.stopPropagation();
-      setSpecies('');
-    } else {
-      focusSpecies();
-    }
-  }, [species, focusSpecies]);
+  const handleSpeciesIconClick = useCallback(
+    (e) => {
+      if (species) {
+        e?.preventDefault();
+        e?.stopPropagation();
+        setSpecies('');
+      } else {
+        focusSpecies();
+      }
+    },
+    [species, focusSpecies],
+  );
 
   return (
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select ref={statusRef} value={status} onChange={onStatusChange} aria-label="Status">
+          <Select
+            ref={statusRef}
+            value={status}
+            onChange={onStatusChange}
+            aria-label="Status"
+          >
             <option value="" disabled>
               Status
             </option>
@@ -97,17 +114,22 @@ export function Filters() {
             <option value="unknown">Unknown</option>
           </Select>
 
-          <FieldIcon onClick={status ? clearStatus : undefined} style={{ pointerEvents: status ? 'auto' : 'none' }} title={status ? 'Clear status' : 'Open status'} tabIndex={0} role="button">
-            {status ? (
-              <SvgX />
-            ) : (
-              <SvgChevron />
-            )}
-          </FieldIcon>
+          <FieldIcon
+            onClick={status ? clearStatus : undefined}
+            style={{ pointerEvents: status ? 'auto' : 'none' }}
+            title={status ? 'Clear status' : 'Open status'}
+            tabIndex={0}
+            role="button"
+          >{status ? <SvgX /> : <SvgChevron />}</FieldIcon>
         </Field>
 
         <Field>
-          <Select ref={genderRef} value={gender} onChange={onGenderChange} aria-label="Gender">
+          <Select
+            ref={genderRef}
+            value={gender}
+            onChange={onGenderChange}
+            aria-label="Gender"
+          >
             <option value="" disabled>
               Gender
             </option>
@@ -117,21 +139,29 @@ export function Filters() {
             <option value="unknown">Unknown</option>
           </Select>
 
-          <FieldIcon onClick={gender ? clearGender : undefined} style={{ pointerEvents: gender ? 'auto' : 'none' }} title={gender ? 'Clear gender' : 'Open gender'} tabIndex={0} role="button">
-            {gender ? (
-              <SvgX />
-            ) : (
-              <SvgChevron />
-            )}
-          </FieldIcon>
+          <FieldIcon
+            onClick={gender ? clearGender : undefined}
+            style={{ pointerEvents: gender ? 'auto' : 'none' }}
+            title={gender ? 'Clear gender' : 'Open gender'}
+            tabIndex={0}
+            role="button"
+          >{gender ? <SvgX /> : <SvgChevron />}</FieldIcon>
         </Field>
 
         <Field>
           <InputWrapper>
-            <Input ref={speciesRef} placeholder="Species" value={species} onChange={onSpeciesChange} />
-            <FieldIcon onClick={handleSpeciesIconClick} title={species ? 'Clear species' : 'Open species'} tabIndex={0} role="button">
-              {species ? <SvgX /> : <SvgChevron />}
-            </FieldIcon>
+            <Input
+              ref={speciesRef}
+              placeholder="Species"
+              value={species}
+              onChange={onSpeciesChange}
+            />
+            <FieldIcon
+              onClick={handleSpeciesIconClick}
+              title={species ? 'Clear species' : 'Open species'}
+              tabIndex={0}
+              role="button"
+            >{species ? <SvgX /> : <SvgChevron />}</FieldIcon>
           </InputWrapper>
         </Field>
       </TopRow>
@@ -141,9 +171,7 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Name" value={name} onChange={onNameChange} />
             {name ? (
-              <FieldIcon onClick={clearField(setName)} title="Clear name" tabIndex={0} role="button">
-                <SvgX />
-              </FieldIcon>
+              <FieldIcon onClick={clearField(setName)} title="Clear name" tabIndex={0} role="button">{<SvgX />}</FieldIcon>
             ) : null}
           </InputWrapper>
         </Field>
@@ -152,9 +180,7 @@ export function Filters() {
           <InputWrapper>
             <Input placeholder="Type" value={type} onChange={onTypeChange} />
             {type ? (
-              <FieldIcon onClick={clearField(setType)} title="Clear type" tabIndex={0} role="button">
-                <SvgX />
-              </FieldIcon>
+              <FieldIcon onClick={clearField(setType)} title="Clear type" tabIndex={0} role="button">{<SvgX />}</FieldIcon>
             ) : null}
           </InputWrapper>
         </Field>
