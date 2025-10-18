@@ -81,12 +81,15 @@ export function Filters() {
   }, [setActivePage, setApiURL, url]);
 
   // helpers to clear individual fields
-  const clearField = useCallback((fieldSetter) => (e) => {
-    // Prevent the native select dropdown from opening when clearing
-    e?.preventDefault();
-    e?.stopPropagation();
-    fieldSetter('');
-  }, []);
+  const clearField = useCallback(
+    (fieldSetter) => (e) => {
+      // Prevent the native select dropdown from opening when clearing
+      e?.preventDefault();
+      e?.stopPropagation();
+      fieldSetter('');
+    },
+    [],
+  );
 
   return (
     <Form onSubmit={applyFilters}>
@@ -213,7 +216,11 @@ export function Filters() {
 
         <Field>
           <InputWrapper>
-            <Input placeholder="Species" value={species} onChange={onSpeciesChange} />
+            <Input
+              placeholder="Species"
+              value={species}
+              onChange={onSpeciesChange}
+            />
             <FieldIcon
               onMouseDown={clearField(setSpecies)}
               title={species ? 'Clear species' : 'Species'}
