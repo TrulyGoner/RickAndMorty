@@ -19,6 +19,36 @@ export function Filters() {
 
   const statusRef = useRef(null);
   const genderRef = useRef(null);
+
+  const handleStatusIconMouseDown = useCallback((e) => {
+    e.preventDefault();
+    if (status) {
+      e.stopPropagation();
+      setStatus('');
+    } else {
+      statusRef.current?.focus();
+      try {
+        statusRef.current?.click();
+      } catch (err) {
+        // ignore
+      }
+    }
+  }, [status]);
+
+  const handleGenderIconMouseDown = useCallback((e) => {
+    e.preventDefault();
+    if (gender) {
+      e.stopPropagation();
+      setGender('');
+    } else {
+      genderRef.current?.focus();
+      try {
+        genderRef.current?.click();
+      } catch (err) {
+        // ignore
+      }
+    }
+  }, [gender]);
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
@@ -98,7 +128,12 @@ export function Filters() {
     <Form onSubmit={applyFilters}>
       <TopRow>
         <Field>
-          <Select ref={statusRef} value={status} onChange={onStatusChange} aria-label="Status">
+          <Select
+            ref={statusRef}
+            value={status}
+            onChange={onStatusChange}
+            aria-label="Status"
+          >
             <option value="" disabled>
               Status
             </option>
@@ -108,22 +143,7 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onMouseDown={(e) => {
-              // keep native behavior: open select when empty, clear when value exists
-              e.preventDefault();
-              if (status) {
-                e.stopPropagation();
-                setStatus('');
-              } else {
-                statusRef.current?.focus();
-                // programmatically open native select in some browsers
-                try {
-                  statusRef.current?.click();
-                } catch (err) {
-                  // ignore
-                }
-              }
-            }}
+            onMouseDown={handleStatusIconMouseDown}
             title={status ? 'Clear status' : 'Open status'}
             aria-hidden={false}
             tabIndex={0}
@@ -173,7 +193,12 @@ export function Filters() {
         </Field>
 
         <Field>
-          <Select ref={genderRef} value={gender} onChange={onGenderChange} aria-label="Gender">
+          <Select
+            ref={genderRef}
+            value={gender}
+            onChange={onGenderChange}
+            aria-label="Gender"
+          >
             <option value="" disabled>
               Gender
             </option>
@@ -184,20 +209,7 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onMouseDown={(e) => {
-              e.preventDefault();
-              if (gender) {
-                e.stopPropagation();
-                setGender('');
-              } else {
-                genderRef.current?.focus();
-                try {
-                  genderRef.current?.click();
-                } catch (err) {
-                  // ignore
-                }
-              }
-            }}
+            onMouseDown={handleGenderIconMouseDown}
             title={gender ? 'Clear gender' : 'Open gender'}
             tabIndex={0}
             role="button"
