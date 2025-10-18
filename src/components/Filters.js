@@ -127,7 +127,8 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onClick={handleStatusIconClick}
+            onClick={status ? clearStatus : undefined}
+            style={{ pointerEvents: status ? 'auto' : 'none' }}
             title={status ? 'Clear status' : 'Open status'}
             aria-hidden={false}
             tabIndex={0}
@@ -193,7 +194,8 @@ export function Filters() {
           </Select>
 
           <FieldIcon
-            onClick={handleGenderIconClick}
+            onClick={gender ? clearGender : undefined}
+            style={{ pointerEvents: gender ? 'auto' : 'none' }}
             title={gender ? 'Clear gender' : 'Open gender'}
             tabIndex={0}
             role="button"
