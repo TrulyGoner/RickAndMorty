@@ -53,8 +53,8 @@ export function Filters() {
         }
       }
     },
-    [gender],
-  );
+    [gender]
+    );
   const [species, setSpecies] = useState(url.searchParams.get('species') || '');
   const [type, setType] = useState(url.searchParams.get('type') || '');
 
