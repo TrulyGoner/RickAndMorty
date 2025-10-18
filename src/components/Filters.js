@@ -34,7 +34,7 @@ export function Filters() {
             new MouseEvent('mousedown', {
               bubbles: true,
               cancelable: true,
-            }),
+            })
           );
           el?.dispatchEvent(
             new MouseEvent('mouseup', {
